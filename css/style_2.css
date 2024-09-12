@@ -47,7 +47,7 @@ main {
 }
 
 header {
-  height: 90%;
+  height: 150px;
   width: 100%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   background: var(--cor-font);
@@ -71,13 +71,15 @@ header {
   transition: #fff 0.3s, color 0.3s;
   margin-top: -205px;
 }
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48;
-  font-size: 45;
+
+.account-icon {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  filter: invert(27%) sepia(24%) saturate(195%) hue-rotate(128deg) brightness(94%) contrast(90%);
+  margin-left: 1020px;
+  transition: #ababab 0.3s, color 0.3s;
+  margin-top: -190px;
 }
 
 .button-container {
