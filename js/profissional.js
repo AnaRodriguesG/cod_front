@@ -36,3 +36,25 @@ function calculateResult() {
     result.style.display = 'block';
     result.innerHTML = `<div class="feedback">Profissão Sugerida: ${sugestaoProfissao || 'Não foi possível sugerir uma profissão com base nas respostas fornecidas'}</div>`;
 }
+function enviarResultado() {
+    const resultado = {
+        relatorio_Perfil: "Perfil Exemplo",
+        resultado_Teste: "Teste Exemplo",
+        tabela_Tipo_Pergunta: 1,  // Id de uma pergunta
+        tabela_Resposta_Teste: 1  // Id de uma resposta
+    };
+
+    fetch('https://localhost:5001/api/resultado/salvar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(resultado)
+    }).then(response => response.json())
+      .then(data => {
+          console.log(data.message);
+      }).catch(error => {
+          console.error('Erro ao salvar resultado:', error);
+      });
+}
+
