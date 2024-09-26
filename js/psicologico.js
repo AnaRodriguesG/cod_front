@@ -38,3 +38,25 @@ function calculateResult() {
     result.style.display = 'block';
     result.innerHTML = `<div class="feedback">Perfil Psicológico Identificado: ${perfilPsicologico || 'Não foi possível identificar um perfil com base nas respostas fornecidas'}</div>`;
 }
+
+function enviarResultado(sugestaoProfissao) {
+    const resultado = {
+        relatorio_Perfil: `Sugestão de Profissão: ${sugestaoProfissao || 'Não definido'}`,
+        resultado_Teste: "Teste Exemplo" // Altere conforme necessário
+    };
+
+    fetch('http://localhost:5109/api/Resultado/salvar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(resultado)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error('Erro ao salvar resultado:', error);
+    });
+}
