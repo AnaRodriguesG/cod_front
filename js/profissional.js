@@ -9,6 +9,7 @@ function calculateResult() {
             answers.push(null);
         }
     });
+    
     // Mapeamento de respostas para sugestões de profissões
     let profissaoMap = {
         "Pouco": "Pesquisador",
@@ -24,6 +25,7 @@ function calculateResult() {
         "Bastante": "Relações Públicas",
         "Não me afeta": "Empreendedor"
     };
+    
     let sugestaoProfissao = '';
     for (let answer of answers) {
         if (answer && profissaoMap[answer]) {
@@ -35,26 +37,31 @@ function calculateResult() {
     let result = document.getElementById('result');
     result.style.display = 'block';
     result.innerHTML = `<div class="feedback">Profissão Sugerida: ${sugestaoProfissao || 'Não foi possível sugerir uma profissão com base nas respostas fornecidas'}</div>`;
+    
+    // Chama a função para enviar o resultado
+    enviarResultado(sugestaoProfissao);
 }
-function enviarResultado() {
+
+function enviarResultado(sugestaoProfissao) {
     const resultado = {
-        relatorio_Perfil: "Perfil Exemplo",
-        resultado_Teste: "Teste Exemplo",
-        tabela_Tipo_Pergunta: 1,  // Id de uma pergunta
-        tabela_Resposta_Teste: 1  // Id de uma resposta
+        relatorio_Perfil: `Sugestão de Profissão: ${sugestaoProfissao || 'Não definido'}`,
+        resultado_Teste: "Teste Exemplo" // Altere conforme necessário
     };
 
-    fetch('https://localhost:5001/api/resultado/salvar', {
+    fetch('http://localhost:5109/api/Resultado/salvar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(resultado)
-    }).then(response => response.json())
-      .then(data => {
-          console.log(data.message);
-      }).catch(error => {
-          console.error('Erro ao salvar resultado:', error);
-      });
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error('Erro ao salvar resultado:', error);
+    });
 }
+
 
